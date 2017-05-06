@@ -9,7 +9,7 @@ class ShareCounter
   # network lookups
 
   def self.reddit url
-    html = make_request "http://www.reddit.com/api/info.json", url: url
+    html = make_request "https://www.reddit.com/api/info.json", url: url
     j = JSON.parse(html)
 
     unless j['data']['children'].empty?
@@ -20,7 +20,7 @@ class ShareCounter
   end
 
   def self.twitter url
-    html = make_request "http://urls.api.twitter.com/1/urls/count.json",  url: url
+    html = make_request "https://urls.api.twitter.com/1/urls/count.json",  url: url
     return JSON.parse(html)['count']
   end
 
@@ -30,7 +30,7 @@ class ShareCounter
   end
 
   def self.linkedin url
-    html = make_request "http://www.linkedin.com/countserv/count/share", url: url, callback: "IN.Tags.Share.handleCount"
+    html = make_request "https://www.linkedin.com/countserv/count/share", url: url, callback: "IN.Tags.Share.handleCount"
     return JSON.parse(html)['count']
   end
 
@@ -46,12 +46,12 @@ class ShareCounter
   end
 
   def self.stumbleupon url
-    html = make_request "http://www.stumbleupon.com/services/1.01/badge.getinfo", url: url
+    html = make_request "https://www.stumbleupon.com/services/1.01/badge.getinfo", url: url
     return JSON.parse(html)['result']['views']
   end
 
   def self.pinterest url
-    html = make_request "http://widgets.pinterest.com/v1/urls/count.json", url: url, source: 6
+    html = make_request "https://widgets.pinterest.com/v1/urls/count.json", url: url, source: 6
     html.gsub! 'receiveCount(', ''
     html.gsub! ')', ''
     return JSON.parse(html)['count']
